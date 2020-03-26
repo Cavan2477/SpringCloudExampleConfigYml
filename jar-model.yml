@@ -1,0 +1,6 @@
+configParam: inner-test jar-model configParam
+
+# 日志配置
+#logging:
+#  level: debug
+#  config: classpath:logback/logback-inner-test.xml

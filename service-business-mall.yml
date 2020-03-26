@@ -1,0 +1,94 @@
+configParam: inner-test service-business-mall configParam
+
+spring:
+#  datasource:
+#    url: jdbc:mysql://172.16.20.30:3306/db_ctp?useUnicode=true&autoReconnect=true&characterEncoding=utf-8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Hongkong
+#    username: ctp_dev
+#    password: ctpdev
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    initialSize: 5
+#    minIdle: 5
+#    maxActive: 20
+#    maxWait: 60000
+  # redis配置，以下有默认配置的也可以使用默认配置
+#  redis:
+#    host: 172.16.20.17
+#    port: 6379
+#    password:
+#    timeout: 0
+#    database: 0
+#    pool:
+#      max-active: 8
+#      max-idle: 8
+#      max-wait: -1
+#      min-idle: 0
+#  mail:
+#    host: smtp.mxhichina.com
+#    port: 587
+#    username: official@coinlim.com
+#    password: Coinlim123
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+#            required: true
+#  sms:
+#    url: http://sms.easyct.net/webService/restSmsService/smsService/sendSms.json
+#    account: zhongsheng
+#    password: 5f0ac406cff93e2a826553b5546fe712
+#    smsType: zhongsheng
+#    subCode: 5243
+  # zipkin日志追踪
+  zipkin:
+    # zipkin服务器待配置
+    base-url: http://ctp.service-mgr-zipkin.inner-test:49200
+  sleuth:
+    sampler:
+      percentage: 1.0
+
+# 启用断路机制
+feign:
+  hystrix:
+    enabled: true
+  httpclient:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+  threadpool:
+    default:
+      coreSize: 500
+
+# ribbon全局设置，直接用ribbon.<key>=<value>的方式设置ribbon的默认参数
+ribbon:
+  #请求处理的超时时间
+  ReadTimeout: 60000
+  #ribbon请求连接的超时时间
+  ConnectTimeout: 60000
+  #对所有操作请求都进行重试
+  OkToRetryOnAllOperations: true
+  #对当前实例的重试次数
+  MaxAutoRetries: 3
+  #对下个实例的重试次数
+  MaxAutoRetriesNextServer: 3
+
+#指定服务配置
+#为了有针对性的配置，针对各个服务客户端进行个性化配置方式与使用Spring cloud Ribbon时的配置方式一样的，
+#都采用<client>.ribbon.<key>=<value>的格式进行设置
+service-business-order:
+  #ribbon请求连接的超时时间
+  ConnectTimeOut: 10000
+  #请求处理的超时时间
+  ReadTimeout: 10000
+
+## 日志配置
+#logging:
+#  level: debug
+#  config: classpath:logback/logback-inner-test.xml
