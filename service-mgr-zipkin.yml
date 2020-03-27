@@ -1,1 +1,13 @@
 configParam: inner-test service-business-zipkin configParam
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/springcloud_1_5_8_demo?useUnicode=true&characterEncoding=utf-8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Hongkong
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
